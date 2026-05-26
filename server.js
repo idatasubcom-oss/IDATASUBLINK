@@ -1,17 +1,14 @@
 const express = require("express");
-const mongoose = require("mongoose");
-require("dotenv").config();
-
 const app = express();
+
+const userRoutes = require("./routes/userRoutes");
 
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected"))
-.catch((err) => console.log(err));
+app.use("/api", userRoutes);
 
 app.get("/", (req, res) => {
-  res.send("IDATASUBFAST Backend Running");
+  res.send("IDATASUBFAST API Working");
 });
 
 const PORT = process.env.PORT || 5000;
