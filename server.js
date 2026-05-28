@@ -1,14 +1,23 @@
 const express = require("express");
-const app = express();
 
-const userRoutes = require("./routes/userRoutes");
+const app = express();
 
 app.use(express.json());
 
-app.use("/api", userRoutes);
-
 app.get("/", (req, res) => {
-  res.send("IDATASUBFAST API Working");
+  res.send("API is running...");
+});
+
+app.post("/api/register", (req, res) => {
+  const { name, email, password } = req.body;
+
+  res.json({
+    message: "User registered successfully",
+    user: {
+      name,
+      email
+    }
+  });
 });
 
 const PORT = process.env.PORT || 5000;
